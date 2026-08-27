@@ -2,6 +2,7 @@
    weekends included. All data lives in localStorage under a single key. */
 
 var STORAGE_KEY = 'habitTracker.v1';
+var THEME_KEY = 'habitTracker.theme';
 var MAX_HABITS = 10;
 
 /* Colour assigned to each habit, in the order habits are created. */
@@ -93,6 +94,41 @@ function saveStore() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
   } catch (err) {
     /* Storage may be full or blocked (e.g. private browsing); the app still works for this session. */
+  }
+}
+
+/* Reads the saved theme preference, falling back to the system preference if none is stored. */
+function loadTheme() {
+  try {
+    var saved = localStorage.getItem(THEME_KEY);
+    if (saved === 'dark' || saved === 'light') {
+      return saved;
+    }
+  } catch (err) {
+    /* Storage may be blocked (e.g. private browsing); fall through to the system preference. */
+  }
+  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+/* Applies the given theme to the page and updates the toggle button's icon and label. */
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  var toggle = document.getElementById('themeToggle');
+  if (toggle) {
+    toggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+    toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+}
+
+/* Switches between light and dark mode and remembers the choice for next time. */
+function toggleTheme() {
+  var current = document.documentElement.getAttribute('data-theme');
+  var next = current === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  try {
+    localStorage.setItem(THEME_KEY, next);
+  } catch (err) {
+    /* Storage may be full or blocked; the choice just won't persist across reloads. */
   }
 }
 
@@ -317,8 +353,12 @@ function buildNameCell(habit) {
   return cell;
 }
 
-/* Wires up the add form, day squares and inline renaming, then draws the app. */
+/* Wires up the add form, day squares, inline renaming and the theme toggle, then draws the app. */
 function init() {
+  applyTheme(loadTheme());
+
+  document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
   document.getElementById('addForm').addEventListener('submit', function (event) {
     event.preventDefault();
     var input = document.getElementById('habitInput');
