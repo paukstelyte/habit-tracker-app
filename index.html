@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habit Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+
+    <header class="header">
+      <h1>Habit Tracker</h1>
+      <p class="badges">
+        <span class="month-label" id="monthLabel"></span>
+        <span class="today-label" id="todayLabel"></span>
+      </p>
+    </header>
+
+    <section class="howto">
+      <h2>How to use</h2>
+      <ol>
+        <li>Add up to <strong>10 habits</strong> below — type your own, or tap a suggestion.</li>
+        <li>Click any square in a habit's row to mark that day as done. Click again to undo. <strong>Today</strong> is the circled date, highlighted down the whole column.</li>
+        <li>Rename a habit by clicking its name, or remove it with the <strong>×</strong> at the end of its row.</li>
+        <li>Everything saves automatically in your browser, so it's still here next time.</li>
+      </ol>
+    </section>
+
+    <section class="add">
+      <form class="add-form" id="addForm" autocomplete="off">
+        <input type="text" id="habitInput" placeholder="e.g. Read 20 minutes" maxlength="40" aria-label="New habit name">
+        <button type="submit" id="addButton">Add habit</button>
+      </form>
+      <p class="counter" id="slotCounter"></p>
+
+      <div class="suggestions" id="suggestions">
+        <span class="suggestions-label">Try one:</span>
+        <div class="chips" id="chips"></div>
+      </div>
+    </section>
+
+    <section class="board">
+      <div class="grid-scroll">
+        <div class="grid" id="grid"></div>
+      </div>
+      <p class="empty" id="emptyState">No habits yet — add your first one above.</p>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

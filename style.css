@@ -1,0 +1,416 @@
+/* ---------- Base ---------- */
+
+:root {
+  --bg: #fbfaf7;
+  --card: #ffffff;
+  --ink: #1c1b1a;
+  --muted: #7b7770;
+  --line: #e8e5df;
+  --radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 40px 24px 80px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+/* ---------- Header ---------- */
+
+.header {
+  margin-bottom: 28px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: -0.02em;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 0;
+}
+
+.month-label,
+.today-label {
+  padding: 5px 13px;
+  font-size: 13.5px;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+.month-label {
+  color: #4338ca;
+  background: #eef2ff;
+  border: 1px solid #dcdffb;
+}
+
+.today-label {
+  color: #0f766e;
+  background: #ecfdf7;
+  border: 1px solid #cdeee4;
+}
+
+/* ---------- How to use ---------- */
+
+.howto {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  margin-bottom: 24px;
+}
+
+.howto h2 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.howto ol {
+  margin: 0;
+  padding-left: 20px;
+  color: #46433e;
+}
+
+.howto li + li {
+  margin-top: 4px;
+}
+
+/* ---------- Add habit ---------- */
+
+.add {
+  margin-bottom: 28px;
+}
+
+.add-form {
+  display: flex;
+  gap: 8px;
+}
+
+#habitInput {
+  flex: 1;
+  min-width: 0;
+  padding: 11px 14px;
+  font: inherit;
+  color: inherit;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+#habitInput:focus {
+  border-color: #9a95c9;
+}
+
+#addButton {
+  padding: 11px 20px;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: #4f46e5;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+#addButton:hover:not(:disabled) {
+  background: #4338ca;
+}
+
+#addButton:disabled {
+  background: #cbc9c4;
+  cursor: not-allowed;
+}
+
+.counter {
+  margin: 8px 2px 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ---------- Suggestion chips ---------- */
+
+.suggestions {
+  margin-top: 18px;
+}
+
+.suggestions-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 7px 13px;
+  font: inherit;
+  font-size: 13.5px;
+  color: #46433e;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.12s, border-color 0.15s, background 0.15s;
+}
+
+.chip:hover {
+  transform: translateY(-1px);
+  border-color: #c9c5bd;
+  background: #fffdf8;
+}
+
+.chip:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ---------- Grid ---------- */
+
+.board {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 6px;
+}
+
+.grid-scroll {
+  overflow-x: auto;
+}
+
+.grid {
+  display: grid;
+  min-width: max-content;
+}
+
+/* Every cell in the grid shares this base */
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+}
+
+/* Left-hand habit name column, pinned while scrolling sideways */
+.name-cell {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  gap: 8px;
+  justify-content: flex-start;
+  width: 240px;
+  padding: 0 12px 0 10px;
+  background: var(--card);
+  border-right: 1px solid var(--line);
+}
+
+.dot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.name-input {
+  flex: 1;
+  min-width: 0;
+  padding: 4px 6px;
+  font: inherit;
+  font-size: 14px;
+  color: inherit;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  outline: none;
+}
+
+.name-input:hover {
+  border-color: var(--line);
+}
+
+.name-input:focus {
+  background: #fbfaf7;
+  border-color: #c9c5bd;
+}
+
+.score {
+  flex: none;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.remove {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1;
+  color: #8d8880;
+  background: #f1efea;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+
+.remove:hover {
+  color: #dc2626;
+  background: #fee2e2;
+  border-color: #f6c9c9;
+}
+
+/* Column headers: weekday letter above the date number */
+.head-cell {
+  flex-direction: column;
+  gap: 1px;
+  height: 44px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.head-cell .dow {
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.75;
+}
+
+.head-cell .num {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #46433e;
+  font-variant-numeric: tabular-nums;
+}
+
+.head-cell.corner {
+  border-right: 1px solid var(--line);
+}
+
+/* A thin rule marks where each new week begins */
+.week-start {
+  border-left: 1px solid var(--line);
+}
+
+/* The tappable square for one habit on one day */
+.mark {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: #f1efea;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.15s;
+}
+
+.mark:hover {
+  transform: scale(1.14);
+}
+
+/* Saturdays and Sundays are tinted so the working week stays readable */
+.weekend {
+  background: #f7f5f0;
+}
+
+.weekend .mark {
+  background: #e6e2da;
+}
+
+.head-cell.weekend .num,
+.head-cell.weekend .dow {
+  color: #a9a49c;
+}
+
+.mark.done {
+  background: var(--habit-color);
+}
+
+/* Today's column — the day the app is being opened on, marked down the whole grid */
+.cell.today {
+  background: #ecfdf7;
+  box-shadow: inset 1px 0 0 #a7e0cd, inset -1px 0 0 #a7e0cd;
+}
+
+.cell.today .mark:not(.done) {
+  background: #cdeade;
+}
+
+.head-cell.today {
+  border-radius: 8px 8px 0 0;
+}
+
+.head-cell.today .dow {
+  color: #0f766e;
+  opacity: 1;
+  font-weight: 700;
+}
+
+/* The date number for today sits in a filled circle */
+.head-cell.today .num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 21px;
+  height: 21px;
+  color: #ffffff;
+  background: #0f766e;
+  border-radius: 50%;
+}
+
+.row-tint:hover .mark:not(.done) {
+  background: #e2ded6;
+}
+
+.empty {
+  margin: 0;
+  padding: 26px 12px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.empty.hidden {
+  display: none;
+}
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 600px) {
+  body {
+    padding: 24px 14px 60px;
+  }
+
+  .name-cell {
+    width: 172px;
+  }
+}
