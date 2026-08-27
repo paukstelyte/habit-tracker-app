@@ -35,10 +35,36 @@ body {
   margin-bottom: 28px;
 }
 
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 .header h1 {
   margin: 0;
   font-size: 30px;
   letter-spacing: -0.02em;
+}
+
+.theme-toggle {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.theme-toggle:hover {
+  border-color: #c9c5bd;
 }
 
 .badges {
@@ -413,4 +439,101 @@ body {
   .name-cell {
     width: 172px;
   }
+}
+
+/* ---------- Dark mode ---------- */
+
+:root[data-theme="dark"] {
+  --bg: #16181d;
+  --card: #1e2128;
+  --ink: #e7e5e0;
+  --muted: #9a968e;
+  --line: #2d3138;
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+  border-color: #3a3e46;
+}
+
+[data-theme="dark"] .month-label {
+  color: #a5b4fc;
+  background: #1e1b4b;
+  border-color: #312e81;
+}
+
+[data-theme="dark"] .today-label {
+  color: #5eead4;
+  background: #042f2a;
+  border-color: #0f4c43;
+}
+
+[data-theme="dark"] #addButton:hover:not(:disabled) {
+  background: #4338ca;
+}
+
+[data-theme="dark"] #addButton:disabled {
+  background: #3a3d44;
+}
+
+[data-theme="dark"] .chip {
+  color: #d8d5cf;
+}
+
+[data-theme="dark"] .chip:hover {
+  background: #23262d;
+  border-color: #3a3e46;
+}
+
+[data-theme="dark"] .name-input:focus {
+  background: #16181d;
+  border-color: #3a3e46;
+}
+
+[data-theme="dark"] .remove {
+  color: #a19d95;
+  background: #262a31;
+}
+
+[data-theme="dark"] .remove:hover {
+  color: #f87171;
+  background: #3a1d1d;
+  border-color: #5c2626;
+}
+
+[data-theme="dark"] .mark {
+  background: #262a31;
+}
+
+[data-theme="dark"] .weekend {
+  background: #1a1d23;
+}
+
+[data-theme="dark"] .weekend .mark {
+  background: #30343c;
+}
+
+[data-theme="dark"] .head-cell.weekend .num,
+[data-theme="dark"] .head-cell.weekend .dow {
+  color: #6b6860;
+}
+
+[data-theme="dark"] .row-tint:hover .mark:not(.done) {
+  background: #383c44;
+}
+
+[data-theme="dark"] .cell.today {
+  background: #042f2a;
+  box-shadow: inset 1px 0 0 #0f4c43, inset -1px 0 0 #0f4c43;
+}
+
+[data-theme="dark"] .cell.today .mark:not(.done) {
+  background: #0b3b34;
+}
+
+[data-theme="dark"] .head-cell.today .dow {
+  color: #5eead4;
+}
+
+[data-theme="dark"] .head-cell.today .num {
+  background: #0f766e;
 }
